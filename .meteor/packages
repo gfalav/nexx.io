@@ -26,5 +26,5 @@ fourseven:scss
 
 ostrio:flow-router-extra
 kadira:blaze-layout
-accounts-ui
+useraccounts:bootstrap
 accounts-password
