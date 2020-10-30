@@ -1,25 +1,37 @@
 <template name="ProyectosNew">
 	<h4>Nuevo Proyecto</h4>
-	{{>ProyectosForm}}
+	{{proyecto}}
+	{{>ProyectosForm p=proyecto readOnly='' }}
 
 	<a href="{{pathFor '/proyectos'}}" class="btn btn-primary">Volver</a>
 </template>
 
 <template name="ProyectosShow">
 	<h4>Información del Proyecto</h4>
-	{{>ProyectosForm}}
+	{{>ProyectosForm p=proyecto readOnly=readOnly }}
 	
+	<a href="{{pathFor '/proyectos/:id/edit' id=proyecto._id}}" class="btn btn-warning">Editar</a>
 	<a href="{{pathFor '/proyectos'}}" class="btn btn-primary">Volver</a>
 </template>
 
+<template name="ProyectosEdit">
+	<h4>Información del Proyecto</h4>
+	{{>ProyectosForm p=proyecto readOnly='' }}
+	
+	<a href="{{pathFor '/proyectos/:id' id=proyecto._id}}" class="btn btn-warning">Mostrar</a>
+	<a href="{{pathFor '/proyectos'}}" class="btn btn-primary">Volver</a>
+</template>
 
 <template name="ProyectosForm">
-	readonly: {{readOnly}}
 	<form class="forms">
+	  <input type="hidden" id="_id" value="{{p._id}}">
+	  <input type="hidden" id="falta" value="{{p.falta}}">
+	  <input type="hidden" id="userId" value="{{p.userId}}">
 	  <div class="form-group">
 	    <label for="nombre">Nombre</label>
 	    <input type="text" class="form-control form-control-sm" id="nombre" value="{{p.nombre}}" {{readOnly}}>
 	  </div>
+
 	  <div class="form-group">
 	    <label for="nombre">Descripción</label>
 	    <input type="text" class="form-control form-control-sm" id="desc" value="{{p.desc}}" {{readOnly}}>
@@ -44,14 +56,16 @@
 	    <label for="nombre">Ubicación</label>
 	    <input type="text" class="form-control form-control-sm" id="ubicacion" value="{{p.ubicacion}}" {{readOnly}}>
 	  </div>
-	  <button type="submit" class="btn btn-danger">Enviar</button>
+	  {{#unless (readOnly)}}
+	  	<button type="submit" class="btn btn-danger btn-submit">Enviar</button>
+	  {{/unless}}
 	</form>
 </template>
 
 <template name="ProyectosLst">
 	<div class="row list">
 		<div class="col">
-			<h3>Porfolio de Proyectos</h3>		
+			<h4>Porfolio de Proyectos</h4>		
 		</div>
 		<div class="col">
 			<a href="{{pathFor '/proyectos/new'}}" class="btn btn-primary btn-newproy">Nuevo Proyecto</a>		

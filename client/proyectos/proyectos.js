@@ -14,7 +14,13 @@ Template.ProyectosNew.events({
 		data.expediente = e.target.expediente.value;
 		data.ubicacion = e.target.ubicacion.value;
 
-		Meteor.call('proyectos.insert', {data} );
+		Meteor.call('proyectos.insert', {data}, (err, res)=> {
+			if (err){ 
+				alert(err);
+			} else {
+				FlowRouter.go('/proyectos/' + res);
+			}
+		});
 	}
 });
 
@@ -30,7 +36,7 @@ Template.ProyectosLst.helpers({
 	},
 
 	dateFormat: function(date){
-		return DateTime.fromFormat(date.toLocaleString(),'dd/LL/yyyy HH:mm:ss').toFormat('dd/LL/yyyy');
+		return DateTime.fromFormat(date.toLocaleString(),'dd/LL/yyyy H:mm:ss').toFormat('dd/LL/yyyy');
 	}
 });
 
@@ -40,20 +46,47 @@ Template.ProyectosShow.onCreated(function() {
   });
 });
 
-Template.ProyectosForm.helpers({
-	p: function(){
-		if (FlowRouter.getRouteName() == 'proyectoNew') {
-			return null;
-		} else {
-			return Proyectos.findOne(FlowRouter.getParam('_id'));
-		}
+Template.ProyectosShow.helpers({
+	proyecto: function(){
+		return Proyectos.findOne(FlowRouter.getParam('_id'));
 	},
 	readOnly: function(){
+		return 'readonly';
+	}
+});
 
-		if (FlowRouter.getRouteName() == 'proyectoShow') {
-			return 'readonly';
-		} else {
-			return '';
-		}
+Template.ProyectosEdit.onCreated(function() {
+  this.autorun(() => {
+    this.subscribe('proyectos.show', FlowRouter.getParam('_id') );
+  });
+});
+
+Template.ProyectosEdit.helpers({
+	proyecto: function(){
+		return Proyectos.findOne(FlowRouter.getParam('_id'));
+	}
+});
+
+Template.ProyectosEdit.events({
+	'submit form': function(e){
+		e.preventDefault();
+		var data = new Object();
+
+		data._id = e.target._id.value;
+		data.nombre = e.target.nombre.value;
+		data.desc = e.target.desc.value;
+		data.proyectista = e.target.proyectista.value;
+		data.comitente = e.target.comitente.value;
+		data.contratista = e.target.contratista.value;
+		data.expediente = e.target.expediente.value;
+		data.ubicacion = e.target.ubicacion.value;
+
+		Meteor.call('proyectos.update', {data}, (err, res)=> {
+			if (err){ 
+				alert(err);
+			} else {
+				FlowRouter.go('/proyectos/'+data._id);
+			}
+		});
 	}
 });

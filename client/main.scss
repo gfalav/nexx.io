@@ -13,8 +13,12 @@ body {
 	padding-right: 8px;
 }
 
-.forms, .list {
+.forms {
 	padding-top: 20px;
+}
+
+.list{
+	margin: 10px;
 }
 
 .btn-date {
@@ -44,4 +48,8 @@ body {
 
 .btn-newproy {
 	float: right;
+}
+
+.btn-submit {
+	margin-bottom: 4px;
 }
