@@ -53,3 +53,16 @@ body {
 .btn-submit {
 	margin-bottom: 4px;
 }
+
+#map {
+  height: 600px;
+  width: 100%;
+}
+
+.mapa {
+	border-style: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	border-color: grey;
+	margin: 10px;
+}

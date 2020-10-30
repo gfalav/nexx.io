@@ -77,3 +77,20 @@
 		{{/each}}
 	</div>
 </template>
+
+<template name="PuntosMaps">
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXocR-JlBcUDUCFMPvpIXqnH6r4-3DIOU&callback=initMap&libraries=&v=weekly" defer></script>
+	<div class="row">
+		<div class="col-7">
+			<div id="map" class="mapa"></div>
+		</div>
+		<div class="col-5">
+			{{> PuntosLst }}
+		</div>
+	</div>
+</template>
+
+<template name="key">
+	AIzaSyCS0O2bJ1gdSqA5nlOUhBQKoVnLAMqFL2U free
+	AIzaSyAXocR-JlBcUDUCFMPvpIXqnH6r4-3DIOU mine
+</template>
