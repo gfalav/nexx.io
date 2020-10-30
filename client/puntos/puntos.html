@@ -1,0 +1,79 @@
+<template name="PuntosNew">
+	<h4>Nuevo Punto</h4>
+	{{>PuntosForm p=punto readOnly='' }}
+
+	<a href="{{pathFor '/puntos'}}" class="btn btn-primary">Volver</a>
+</template>
+
+<template name="PuntosShow">
+	<h4>Información del Punto</h4>
+	{{>PuntosForm p=punto readOnly=readOnly }}
+	
+	<a href="{{pathFor '/puntos/punto/:id/edit' id=punto._id}}" class="btn btn-warning">Editar</a>
+	<a href="{{pathFor '/puntos/:proyectoId' proyectoId=punto.proyectoId}}" class="btn btn-primary">Volver</a>
+</template>
+
+<template name="PuntosEdit">
+	<h4>Información del Punto</h4>
+	{{>PuntosForm p=punto readOnly='' }}
+	
+	<a href="{{pathFor '/puntos/punto/:id' id=punto._id}}" class="btn btn-warning">Mostrar</a>
+	<a href="{{pathFor '/puntos/:proyectoId' proyectoId=punto.proyectoId}}" class="btn btn-primary">Volver</a>
+</template>
+
+<template name="PuntosForm">
+	<form class="forms">
+	  <input type="hidden" id="_id" value="{{p._id}}">
+	  <input type="hidden" id="falta" value="{{p.falta}}">
+	  <input type="hidden" id="proyectoId" value="{{p.proyectoId}}">
+	  <div class="form-group">
+	    <label for="nombre">Nombre</label>
+	    <input type="text" class="form-control form-control-sm" id="nombre" value="{{p.nombre}}" {{readOnly}}>
+	  </div>
+
+	  <div class="form-group">
+	    <label for="nombre">Secuencia</label>
+	    <input type="text" class="form-control form-control-sm" id="secuencia" value="{{p.secuencia}}" {{readOnly}}>
+	  </div>
+	  <div class="form-group">
+	    <label for="nombre">Latitud</label>
+	    <input type="text" class="form-control form-control-sm" id="lat" value="{{p.lat}}" {{readOnly}}>
+	  </div>
+	  <div class="form-group">
+	    <label for="nombre">Longitud</label>
+	    <input type="text" class="form-control form-control-sm" id="long" value="{{p.long}}" {{readOnly}}>
+	  </div>
+	  <div class="form-group">
+	    <label for="nombre">Distancia</label>
+	    <input type="text" class="form-control form-control-sm" id="dist" value="{{p.dist}}" {{readOnly}}>
+	  </div>
+	  <div class="form-group">
+	    <label for="nombre">Angulo</label>
+	    <input type="text" class="form-control form-control-sm" id="ang" value="{{p.ang}}" {{readOnly}}>
+	  </div>
+	  {{#unless (readOnly)}}
+	  	<button type="submit" class="btn btn-danger btn-submit">Enviar</button>
+	  {{/unless}}
+	</form>
+</template>
+
+<template name="PuntosLst">
+	<div class="row list">
+		<div class="col">
+			<h4>Puntos del Proyecto</h4>		
+		</div>
+		<div class="col">
+			<a href="{{pathFor '/puntos/new/:proyectoId' proyectoId=proyectoId}}" class="btn btn-primary btn-newproy">Nuevo Punto</a>		
+		</div>	
+	</div>
+
+	<div class="list-group">
+		{{#each p in puntos}}
+			<a href="{{pathFor '/puntos/punto/:id' id= p._id}}" class="list-group-item list-group-item-action aproy">
+				<span class="btn-date">Sec: {{p.secuencia}}</span>
+				<span class="btn-title">{{p.nombre}}</span>
+				<span class="btn-subtitle">Lat: {{p.lat}}, Long: {{p.long}} - Dist: {{p.dist}}m, Ang: {{p.ang}}</span>
+			</a>
+		{{/each}}
+	</div>
+</template>

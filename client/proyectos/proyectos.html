@@ -1,6 +1,5 @@
 <template name="ProyectosNew">
 	<h4>Nuevo Proyecto</h4>
-	{{proyecto}}
 	{{>ProyectosForm p=proyecto readOnly='' }}
 
 	<a href="{{pathFor '/proyectos'}}" class="btn btn-primary">Volver</a>
@@ -12,6 +11,7 @@
 	
 	<a href="{{pathFor '/proyectos/:id/edit' id=proyecto._id}}" class="btn btn-warning">Editar</a>
 	<a href="{{pathFor '/proyectos'}}" class="btn btn-primary">Volver</a>
+	<a href="{{pathFor '/puntos/:proyectoId' proyectoId= proyecto._id}}" class="btn btn-info">-> Puntos</a>
 </template>
 
 <template name="ProyectosEdit">
