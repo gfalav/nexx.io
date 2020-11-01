@@ -31,6 +31,10 @@ body {
 	background-color: #e6edfa;
 }
 
+.lstproy {
+	padding: 0px;
+}
+
 .btn-title {
 	color: #3472ed;
 	font-weight: bold;
@@ -52,6 +56,12 @@ body {
 
 .btn-submit {
 	margin-bottom: 4px;
+}
+
+.btn-del {
+	margin: auto;
+    display: block;
+    heigth:  100%;
 }
 
 #map {

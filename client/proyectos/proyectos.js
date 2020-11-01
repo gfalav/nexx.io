@@ -36,7 +36,7 @@ Template.ProyectosLst.helpers({
 	},
 
 	dateFormat: function(date){
-		return DateTime.fromFormat(date.toLocaleString(),'dd/LL/yyyy H:mm:ss').toFormat('dd/LL/yyyy');
+		return DateTime.fromISO(date.toISOString()).toFormat('dd/LL/yyyy');
 	}
 });
 

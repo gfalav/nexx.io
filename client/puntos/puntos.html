@@ -69,11 +69,18 @@
 
 	<div class="list-group">
 		{{#each p in puntos}}
-			<a href="{{pathFor '/puntos/punto/:id' id= p._id}}" class="list-group-item list-group-item-action aproy">
-				<span class="btn-date">Sec: {{p.secuencia}}</span>
-				<span class="btn-title">{{p.nombre}}</span>
-				<span class="btn-desc">Lat: {{p.lat}}, Long: {{p.long}} - Dist: {{p.dist}}m, Ang: {{p.ang}}</span>
-			</a>
+			<div class="row">
+				<div class="col-11 lstproy">
+					<a href="{{pathFor '/puntos/punto/:id' id= p._id}}" class="list-group-item list-group-item-action aproy">
+						<span class="btn-date">{{p.secuencia}}</span>
+						<span class="btn-title">{{p.nombre}}</span>
+						<span class="btn-desc">Lat: {{f6d(p.lat)}}, Long: {{f6d(p.long)}} - Dist: {{f0d(p.dist)}}m, Ang: {{f0d(p.ang)}}º</span>
+					</a>
+				</div>
+				<div class="col-1 lstproy">
+					<button type="submit" id="{{p._id}}" class="btn btn-outline-info"><img src="/trash.png" height="36" class="btn-del"></button>
+				</div>
+			</div>
 		{{/each}}
 	</div>
 </template>
