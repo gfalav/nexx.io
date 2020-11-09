@@ -92,7 +92,7 @@ calc = function(proyectoId){
         	y2 = (p2.lat - p3.lat) * 60 * 1852;
         	ang2 = Math.atan2(y2, x2) * 180 / Math.PI;
     
-        	ang = Math.abs(ang1 - ang2);
+        	ang = Math.round(Math.abs(ang1 - ang2) * 10) / 10;
         	if (ang > 180){
            		ang = 360 - ang;
         	};

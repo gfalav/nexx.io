@@ -2,7 +2,7 @@
 	<h4>Nuevo Punto</h4>
 	{{>PuntosForm p=punto readOnly='' }}
 
-	<a href="{{pathFor '/puntos'}}" class="btn btn-primary">Volver</a>
+	<a href="{{pathFor '/puntos/:proyectoId' proyectoId=proyectoId}}" class="btn btn-primary">Volver</a>
 </template>
 
 <template name="PuntosShow">
@@ -59,12 +59,15 @@
 
 <template name="PuntosLst">
 	<div class="row list">
-		<div class="col">
+		<div class="col-6">
 			<h4>Puntos del Proyecto</h4>		
 		</div>
-		<div class="col">
-			<a href="{{pathFor '/puntos/new/:proyectoId' proyectoId=proyectoId}}" class="btn btn-primary btn-newproy">Nuevo Punto</a>		
-		</div>	
+		<div class="col-4">
+			<a href="{{pathFor '/puntos/new/:proyectoId' proyectoId=proyectoId}}" class="btn btn-primary btn-newproy">Nuevo Punto</a>	
+		</div>
+		<div class="col-2">
+			<a href="{{pathFor '/tramos/:proyectoId' proyectoId=proyectoId}}" class="btn btn-info btn-newproy">Tramos</a>		
+		</div>		
 	</div>
 
 	<div class="list-group">

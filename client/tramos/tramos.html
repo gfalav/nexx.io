@@ -1,0 +1,113 @@
+<template name="TramosNew">
+	<h4>Nuevo Tramo</h4>
+	{{>TramosForm t=tramo readOnly='' }}
+
+	<a href="{{pathFor '/tramos/:proyectoId' proyectoId=proyectoId}}" class="btn btn-primary">Volver</a>
+</template>
+
+<template name="TramosShow">
+	<h4>Información del Tramo</h4>
+	{{>TramosForm t=tramo readOnly=readOnly }}
+	
+	<a href="{{pathFor '/tramos/tramo/:id/edit' id=tramo._id}}" class="btn btn-warning">Editar</a>
+	<a href="{{pathFor '/tramos/:proyectoId' proyectoId=tramo.proyectoId}}" class="btn btn-primary">Volver</a>
+</template>
+
+<template name="TramosEdit">
+	<h4>Información del Tramo</h4>
+	{{>TramosForm t=tramo readOnly='' }}
+	
+	<a href="{{pathFor '/tramos/tramo/:id' id=tramo._id}}" class="btn btn-warning">Mostrar</a>
+	<a href="{{pathFor '/tramos/:proyectoId' proyectoId=tramo.proyectoId}}" class="btn btn-primary">Volver</a>
+</template>
+
+<template name="TramosForm">
+	<form class="forms">
+	  <input type="hidden" id="_id" value="{{t._id}}">
+	  <input type="hidden" id="falta" value="{{t.falta}}">
+	  <input type="hidden" id="proyectoId" value="{{t.proyectoId}}">
+	  <div class="form-group">
+	    <label for="nombre">Nombre</label>
+	    <input type="text" class="form-control form-control-sm" id="nombre" value="{{t.nombre}}" {{readOnly}}>
+	  </div>
+	  <div class="form-group">
+	    <label for="nombre">Secuencia</label>
+	    <input type="text" class="form-control form-control-sm" id="secuencia" value="{{t.secuencia}}" {{readOnly}}>
+	  </div>
+	  <div class="form-group">
+	    <label for="nombre">Vano</label>
+	    <input type="text" class="form-control form-control-sm" id="vano" value="{{t.vano}}" {{readOnly}}>
+	  </div>
+	  <div class="form-group">
+	    <label for="nombre">Alineación</label>
+	    <input type="text" class="form-control form-control-sm" id="alineacion" value="{{t.alineacion}}" {{readOnly}}>
+	  </div>
+	  <div class="form-group">
+	    <label for="nombre">Retención</label>
+	    <input type="text" class="form-control form-control-sm" id="retencion" value="{{t.retencion}}" {{readOnly}}>
+	  </div>
+	  <div class="form-group">
+	    <label for="nombre">Especial</label>
+	    <input type="text" class="form-control form-control-sm" id="especial" value="{{t.especial}}" {{readOnly}}>
+	  </div>
+	  {{#unless (readOnly)}}
+	  	<button type="submit" id="tramosBtn" class="btn btn-danger btn-submit">Enviar</button>
+	  {{/unless}}
+	</form>
+</template>
+
+<template name="TramosCondsForm">
+	<form class="forms" id="condsForm">
+	  <input type="hidden" id="proyectoId" value="{{t.proyectoId}}">
+	  <div class="form-group">
+	    <label for="nombre">Vano máximo (m)</label>
+	    <input type="text" class="form-control form-control-sm" id="vmax" value="80" {{readOnly}}>
+	  </div>
+	  <div class="form-group">
+	    <label for="nombre">Distancia Max. entre Retenciones (m)</label>
+	    <input type="text" class="form-control form-control-sm" id="retmax" value="3000" {{readOnly}}>
+	  </div>
+	  {{#unless (readOnly)}}
+	  	<button type="submit" id="calcBtn" class="btn btn-danger btn-submit">Enviar</button>
+	  {{/unless}}
+	</form>
+</template>
+
+<template name="TramosLst">
+	<div>
+		<h4 class="list"><b>Calcula tramos desde puntos</b></h4>
+	</div>
+	{{> TramosCondsForm}}
+	<div class="row list">
+		<div class="col">
+			<h4 class="list"><b>Tramos del Proyecto</b></h4>		
+		</div>
+		<div class="col-1">
+			<a href="{{pathFor '/tramos/new/:proyectoId' proyectoId=proyectoId}}" class="btn btn-primary btn-newproy">Nuevo Tramo</a>	
+		</div>
+		<div class="col-1">
+			<a href="{{pathFor '/tramos/new/:proyectoId' proyectoId=proyectoId}}" class="btn btn-primary btn-newproy">Desde Puntos</a>	
+		</div>		
+	</div>
+
+
+	<div class="list-group">
+		{{#each t in tramos}}
+			<div class="row">
+				<div class="col-11 lstproy">
+					<a href="{{pathFor '/tramos/tramo/:id' id= t._id}}" class="list-group-item list-group-item-action aproy">
+						<span class="btn-date">{{t.secuencia}}</span>
+						<span class="btn-title">{{t.nombre}}</span>
+						<span class="btn-desc">Vano: {{t.vano}}m, </span>
+						<span class="btn-desc">Alineaciones: {{t.alineacion}},</span>
+						<span class="btn-desc">Retenciones: {{t.retencion}},</span>
+						<span class="btn-desc">Especial: {{t.tfinal}} {{t.especial}}°</span>
+					</a>
+				</div>
+				<div class="col-1 lstproy">
+					<button type="submit" id="{{t._id}}" class="btn btn-outline-info del-btn"><img src="/trash.png" height="36" class="btn-del"></button>
+				</div>
+			</div>
+		{{/each}}
+	</div>
+</template>

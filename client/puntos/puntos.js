@@ -26,7 +26,7 @@ Template.PuntosNew.events({
 
 Template.PuntosNew.helpers({
 	proyectoId: function(){
-
+		return FlowRouter.getParam('proyectoId');
 	}
 })
 
