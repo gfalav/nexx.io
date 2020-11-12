@@ -31,6 +31,9 @@ Template.TramosNew.helpers({
 Template.TramosLst.onCreated(function() {
   this.autorun(() => {
     this.subscribe('tramos.lst', FlowRouter.getParam('proyectoId'));
+    this.subscribe('zonas.lst');
+    this.subscribe('condClimas.lst');
+    this.subscribe('conductores.lst');
   });
 });
 
